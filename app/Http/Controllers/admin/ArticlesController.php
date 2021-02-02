@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use Session;
+use App\Models\Article;
+use App\Models\Category;
 
-class CategoriesController extends Controller
+class ArticlesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,11 @@ class CategoriesController extends Controller
     public function index()
     {
         //
-        //dd("ggg");
-        $cat=Category::all();
-        return view('admin.categoriesList')->with('catlist',$cat);
+
+        $articlesList=Article::get();
+         
+         return view('admin.articleslist')->with('artlist',$articlesList);
+        
     }
 
     /**
@@ -30,10 +32,10 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        $catAll=Category::select('id','name')->where('is_active',1)->get();
-        //dd($catAll);
-        return view('admin.categoriesAdd')->with('parent_cat',$catAll);
-        //return view('admin.categoriesAdd');
+        $catAll=Category::select('id','name')->where('parent','>',0)->get();
+       // dd($catAll);
+        return view('admin.articlesAdd')->with('parent_cat',$catAll);   
+        
     }
 
     /**
@@ -45,19 +47,22 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         //
-        $newCat=new Category;
-       
-        $is_active= $request->has('cat_active')? 1:0;
-    
-        $newCat->name=$request->cat_name;
-        $newCat->parent=$request->cat_parent;
-        $newCat->is_active=$is_active;
-        $resulte=$newCat->save();
-        if ($resulte==1)
-            return redirect()->route('category.index')->with('message','Category has been added');
-        return redirect()->route('category.index')->with('error','Category does not added');
+        $newArticle= new Article;
 
-        //dd($request);
+       // dd($request);
+        $is_active= $request->has('art_active')? 1:0;
+    
+        $newArticle->title=$request->art_title;
+        $newArticle->content=$request->art_content;
+        $newArticle->cat_id=$request->art_cat;
+        $newArticle->is_active=$is_active;
+        
+        $resulte=$newArticle->save();
+
+        if ($resulte==1)
+            return redirect()->route('article.index')->with('message','Article has been added');
+        return redirect()->route('article.index')->with('error','Article does not added');
+
     }
 
     /**

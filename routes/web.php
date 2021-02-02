@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\ArticlesController;
 use App\Http\Controllers\admin\CategoriesController;
+use App\Http\Controllers\admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Prophecy\Call\Call;
 
@@ -24,7 +26,14 @@ Route::get('/home', function () {
     return view('admin.dashboard');
 });
 
-Route::resource('category',CategoriesController::class);
+//['middleware'=>'auth']
+Route::group(['prefix'=>'admin'],function(){
+
+    Route::get('dashboard/{id?}',[DashboardController::class,'index']);
+    
+    Route::resource('category',CategoriesController::class);
+    Route::resource('article',ArticlesController::class);
+});
 
 
 

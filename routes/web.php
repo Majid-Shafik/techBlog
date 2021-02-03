@@ -24,7 +24,7 @@ use Prophecy\Call\Call;
 
 
 
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('frontend');
 
 /*Route::get('/', function () {
     return view('front.index');

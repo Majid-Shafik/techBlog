@@ -15,7 +15,7 @@
             {{ session('meesage') }}
               @if ( session()->has('meesage'))
                   <div class="alert-success">
-                      {{ request()->session()->get('message')}}
+                      {{ session()->get('message')}}
                   </div>
               @else
               <div class="alert-dander">

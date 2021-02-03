@@ -20,7 +20,7 @@ class ArticlesController extends Controller
 
         $articlesList=Article::get();
          
-         return view('admin.articleslist')->with('artlist',$articlesList);
+         return view('admin.articles.articleslist')->with('artlist',$articlesList);
         
     }
 
@@ -34,7 +34,7 @@ class ArticlesController extends Controller
         //
         $catAll=Category::select('id','name')->where('parent','>',0)->get();
        // dd($catAll);
-        return view('admin.articlesAdd')->with('parent_cat',$catAll);   
+        return view('admin.articles.articlesAdd')->with('parent_cat',$catAll);   
         
     }
 

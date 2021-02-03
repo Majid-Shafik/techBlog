@@ -19,7 +19,7 @@ class CategoriesController extends Controller
         //
         //dd("ggg");
         $cat=Category::all();
-        return view('admin.categoriesList')->with('catlist',$cat);
+        return view('admin.categories.categoriesList')->with('catlist',$cat);
     }
 
     /**
@@ -32,7 +32,7 @@ class CategoriesController extends Controller
         //
         $catAll=Category::select('id','name')->where('is_active',1)->get();
         //dd($catAll);
-        return view('admin.categoriesAdd')->with('parent_cat',$catAll);
+        return view('admin.categories.categoriesAdd')->with('parent_cat',$catAll);
         //return view('admin.categoriesAdd');
     }
 

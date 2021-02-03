@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     //
     public function index() {
-        $cat_menu=Category::select('id','name')->where('parent',0)->get();
+        $cat_menu=Category::select('id','name')->where('is_active',1)->where('parent',0)->get();
        // $children = $cat_menu->children;
         //dd($cat_menu);
          //return view('front.index')->with('mainCategorey',$cat_menu)->with('children',$children);
